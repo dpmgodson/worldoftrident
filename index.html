@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#050b09">
+  <meta name="description" content="World of Trident — something worth the wait is on its way.">
+  <title>World of Trident — Coming Soon</title>
+  <style>
+    :root {
+      --bg: #050b09;
+      --bg-soft: #07110e;
+      --green: #00d99a;
+      --green-bright: #53f6c2;
+      --green-dim: rgba(0, 217, 154, .28);
+      --white: #e8f0ed;
+      --muted: #788780;
+      --grid: rgba(130, 170, 151, .055);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { width: 100%; min-height: 100%; margin: 0; }
+    body {
+      min-height: 100svh;
+      overflow: hidden;
+      color: var(--white);
+      background:
+        radial-gradient(ellipse at 49% 49%, rgba(0, 95, 66, .14), transparent 42%),
+        radial-gradient(ellipse at 50% 100%, rgba(0, 48, 34, .12), transparent 55%),
+        var(--bg);
+      font-family: "Arial", "Helvetica Neue", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: geometricPrecision;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .55;
+      background-image:
+        linear-gradient(to right, var(--grid) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+      background-size: 86px 86px;
+      background-position: center center;
+      mask-image: linear-gradient(to bottom, black 0%, black 82%, transparent 100%);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .14;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.92' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
+      mix-blend-mode: screen;
+    }
+
+    .page {
+      position: relative;
+      min-height: 100svh;
+      width: 100%;
+      max-width: 1920px;
+      margin: 0 auto;
+      isolation: isolate;
+    }
+
+    .topbar {
+      position: absolute;
+      z-index: 5;
+      inset: 0 0 auto;
+      height: 92px;
+      padding: 0 clamp(22px, 4.4vw, 68px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(133, 171, 151, .07);
+      background: linear-gradient(180deg, rgba(4, 10, 8, .72), rgba(4, 10, 8, .12));
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .brand-mark {
+      width: 42px;
+      height: 48px;
+      flex: 0 0 auto;
+      filter: drop-shadow(0 0 8px rgba(0, 217, 154, .2));
+    }
+    .brand-name {
+      font-size: 13px;
+      line-height: 1.35;
+      letter-spacing: .19em;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .status-wrap {
+      display: flex;
+      align-items: center;
+      gap: 19px;
+    }
+    .status {
+      height: 44px;
+      min-width: 148px;
+      padding: 0 17px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 11px;
+      border: 1px solid rgba(0, 217, 154, .62);
+      background: rgba(0, 217, 154, .035);
+      color: var(--white);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      box-shadow: inset 0 0 18px rgba(0, 217, 154, .025), 0 0 22px rgba(0, 217, 154, .035);
+    }
+    .status svg { width: 13px; height: 13px; color: var(--green); }
+    .status-copy {
+      color: #82918a;
+      font-size: 9px;
+      line-height: 1.65;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .hero {
+      position: absolute;
+      inset: 92px 0 0;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+    .scene {
+      position: relative;
+      width: min(100%, 1120px);
+      height: min(76svh, 720px);
+      min-height: 390px;
+      margin-top: -10px;
+    }
+    .scene::before {
+      content: "";
+      position: absolute;
+      width: 44%;
+      aspect-ratio: 1;
+      left: 50%; top: 48%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: rgba(0, 211, 146, .035);
+      filter: blur(42px);
+    }
+    .emblem {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+    .orbit {
+      fill: none;
+      stroke: rgba(0, 214, 151, .36);
+      stroke-width: 1.05;
+      vector-effect: non-scaling-stroke;
+    }
+    .orbit-muted {
+      fill: none;
+      stroke: rgba(145, 171, 157, .20);
+      stroke-width: .9;
+      vector-effect: non-scaling-stroke;
+    }
+    .orbit-dash {
+      fill: none;
+      stroke: rgba(0, 217, 154, .33);
+      stroke-width: .85;
+      stroke-dasharray: 2 7;
+      vector-effect: non-scaling-stroke;
+    }
+    .ring-glow {
+      fill: none;
+      stroke: rgba(0, 229, 160, .16);
+      stroke-width: 4;
+      filter: url(#softGlow);
+    }
+    .symbol {
+      fill: none;
+      stroke: var(--green-bright);
+      stroke-width: 1.75;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vector-effect: non-scaling-stroke;
+      filter: url(#lineGlow);
+    }
+    .symbol-faint {
+      fill: none;
+      stroke: rgba(83, 246, 194, .50);
+      stroke-width: 1;
+      stroke-linecap: round;
+      vector-effect: non-scaling-stroke;
+    }
+    .node {
+      fill: var(--bg);
+      stroke: var(--green-bright);
+      stroke-width: 1.5;
+      vector-effect: non-scaling-stroke;
+    }
+    .orbit-one { transform-origin: 50% 50%; animation: orbitTurn 48s linear infinite; }
+    .orbit-two { transform-origin: 50% 50%; animation: orbitTurn 68s linear infinite reverse; }
+    .pulse { animation: pulse 4.6s ease-in-out infinite; }
+    .moving-point { transform-origin: 50% 50%; animation: orbitTurn 25s linear infinite; }
+
+    .side-index {
+      position: absolute;
+      left: clamp(22px, 6.8vw, 104px);
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      color: #75827c;
+      font-size: 8px;
+      font-weight: 600;
+      letter-spacing: .22em;
+      writing-mode: vertical-rl;
+      text-transform: uppercase;
+    }
+    .side-index::after {
+      content: "";
+      height: 36px;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--green), rgba(0, 217, 154, 0));
+    }
+
+    .bottom-note {
+      position: absolute;
+      right: clamp(26px, 7.5vw, 112px);
+      bottom: clamp(44px, 9vh, 84px);
+      color: #77887f;
+      font-family: Georgia, serif;
+      font-size: 13px;
+      font-style: italic;
+      letter-spacing: .055em;
+      opacity: .9;
+    }
+    .corner-mark {
+      position: absolute;
+      right: clamp(22px, 6.8vw, 104px);
+      bottom: 0;
+      width: 12px;
+      height: 12px;
+      border-right: 1px solid rgba(0, 217, 154, .5);
+      border-bottom: 1px solid rgba(0, 217, 154, .5);
+    }
+    .micro-label {
+      position: absolute;
+      left: clamp(22px, 4.4vw, 68px);
+      bottom: 27px;
+      color: rgba(112, 130, 120, .55);
+      font-size: 7px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+
+    @keyframes orbitTurn { to { transform: rotate(360deg); } }
+    @keyframes pulse {
+      0%, 100% { opacity: .75; }
+      50% { opacity: 1; }
+    }
+
+    @media (max-width: 640px) {
+      .topbar { height: 78px; padding: 0 18px; }
+      .brand { gap: 10px; }
+      .brand-mark { width: 34px; height: 40px; }
+      .brand-name { font-size: 10px; letter-spacing: .16em; }
+      .status-wrap { gap: 0; }
+      .status { min-width: 0; height: 38px; padding: 0 11px; font-size: 8px; gap: 8px; }
+      .status-copy { display: none; }
+      .hero { inset: 78px 0 0; }
+      .scene { width: 112%; height: 56svh; min-height: 300px; margin-left: -6%; }
+      .side-index { left: 13px; font-size: 7px; }
+      .bottom-note { right: 22px; bottom: 55px; font-size: 11px; }
+      .micro-label { left: 18px; bottom: 20px; font-size: 6px; }
+      .corner-mark { right: 18px; }
+      body::before { background-size: 58px 58px; }
+    }
+
+    @media (max-height: 520px) and (min-width: 641px) {
+      .topbar { height: 72px; }
+      .hero { inset: 72px 0 0; }
+      .scene { height: 82svh; min-height: 300px; }
+      .bottom-note { bottom: 28px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="World of Trident">
+        <svg class="brand-mark" viewBox="0 0 48 56" aria-hidden="true">
+          <g fill="none" stroke="#00d99a" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M24 49V8M18 49h12M20 49v-5h8v5" />
+            <path d="M24 17C19 17 15 13 13 9c0 8 2 14 8 17 1 1 2 1 3 1 1 0 2 0 3-1 6-3 8-9 8-17-2 4-6 8-11 8Z" />
+            <path d="M24 27c-4 6-7 9-12 10 4 2 8 2 12 0 4 2 8 2 12 0-5-1-8-4-12-10Z" opacity=".8" />
+            <circle cx="24" cy="6" r="2" fill="#00d99a" stroke="none" />
+            <path d="M12 8 9 6m27 2 3-2" opacity=".7" />
+          </g>
+        </svg>
+        <span class="brand-name">World of<br>Trident</span>
+      </a>
+
+      <div class="status-wrap" aria-label="Launch status">
+        <div class="status">
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M15.8 11.2A6.6 6.6 0 0 1 8.7 4.1a6.8 6.8 0 1 0 7.1 7.1Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M12.2 3.1v3.1m-1.55-1.55h3.1" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/>
+          </svg>
+          Coming Soon
+        </div>
+        <div class="status-copy">Something worth<br>the wait is on its way.</div>
+      </div>
+    </header>
+
+    <div class="side-index">World of Trident&nbsp; · &nbsp;001</div>
+
+    <section class="hero" aria-label="World of Trident coming soon">
+      <div class="scene">
+        <svg class="emblem" viewBox="0 0 1000 700" role="img" aria-label="An abstract emerald trident suspended within orbital geometry">
+          <defs>
+            <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="5" result="blur" />
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <filter id="lineGlow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="2.1" result="blur" />
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <radialGradient id="core" cx="50%" cy="48%" r="52%">
+              <stop offset="0" stop-color="#00d99a" stop-opacity=".10" />
+              <stop offset="1" stop-color="#00d99a" stop-opacity="0" />
+            </radialGradient>
+          </defs>
+
+          <ellipse cx="500" cy="350" rx="315" ry="207" fill="url(#core)" />
+
+          <!-- Orbital geometry -->
+          <g class="orbit-one">
+            <ellipse class="orbit" cx="500" cy="350" rx="255" ry="255" opacity=".48" />
+            <ellipse class="orbit-muted" cx="500" cy="350" rx="238" ry="238" />
+            <ellipse class="orbit" cx="500" cy="350" rx="405" ry="116" opacity=".78" />
+            <ellipse class="orbit-dash" cx="500" cy="350" rx="356" ry="133" />
+          </g>
+          <g class="orbit-two">
+            <ellipse class="orbit-muted" cx="500" cy="350" rx="465" ry="154" opacity=".65" />
+            <ellipse class="orbit" cx="500" cy="350" rx="202" ry="202" opacity=".28" />
+          </g>
+          <ellipse class="orbit-muted" cx="500" cy="350" rx="96" ry="34" opacity=".65" />
+          <ellipse class="orbit-dash" cx="500" cy="350" rx="295" ry="154" opacity=".72" />
+          <circle class="ring-glow pulse" cx="500" cy="350" r="255" />
+
+          <!-- Central trident mark -->
+          <g class="symbol">
+            <path d="M500 184V455" />
+            <path d="M500 235C478 265 456 279 430 278c-8 0-15-2-22-6 0 29 8 49 27 62 16 11 37 12 65 12" />
+            <path d="M500 235c22 30 44 44 70 43 8 0 15-2 22-6 0 29-8 49-27 62-16 11-37 12-65 12" />
+            <path d="M500 276c-20 13-31 31-31 52 0 27 13 57 31 84 18-27 31-57 31-84 0-21-11-39-31-52Z" />
+            <path d="M500 412c-11 17-29 34-49 49m49-49c11 17 29 34 49 49" />
+            <path d="M500 455h-27m27 0h27" />
+            <path d="M500 455v-10" />
+            <circle class="node" cx="500" cy="184" r="4.5" />
+          </g>
+          <g class="symbol-faint">
+            <path d="M500 276v136" />
+            <path d="M430 278 415 251m155 27 15-27" />
+            <path d="M406 344h188" opacity=".22" />
+          </g>
+
+          <!-- Measurement line and orbital point -->
+          <g opacity=".66" fill="none" stroke="#91a99c" stroke-width=".9">
+            <path d="M408 405H592" />
+            <circle cx="408" cy="405" r="2.2" />
+            <circle cx="592" cy="405" r="2.2" />
+          </g>
+          <g class="moving-point">
+            <ellipse cx="500" cy="350" rx="405" ry="116" fill="none" stroke="none" />
+            <circle cx="905" cy="350" r="3.3" fill="#53f6c2" />
+            <circle cx="905" cy="350" r="8" fill="#00d99a" opacity=".12" />
+          </g>
+          <circle cx="500" cy="350" r="2" fill="#53f6c2" opacity=".65" />
+        </svg>
+      </div>
+    </section>
+
+    <div class="bottom-note">The next chapter</div>
+    <div class="micro-label">WOT / SIGNAL 001&nbsp;&nbsp; — &nbsp;&nbsp;ESTABLISHING PRESENCE</div>
+    <div class="corner-mark" aria-hidden="true"></div>
+  </main>
+</body>
+</html>
